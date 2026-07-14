@@ -1,12 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { Wrench, LayoutDashboard, ClipboardList, Users, Package, LogOut, Bell } from "lucide-react";
+import { Wrench, LayoutDashboard, ClipboardList, Users, Package, LogOut, Bell, FileText } from "lucide-react";
 import { clearSession, getStoredSession } from "@/lib/session";
 
 const NAV = [
   { href: "/dashboard", label: "Tablero", icon: LayoutDashboard },
   { href: "/ordenes", label: "Órdenes", icon: ClipboardList },
+  { href: "/cotizaciones", label: "Cotizaciones", icon: FileText },
   { href: "/clientes", label: "Clientes", icon: Users },
   { href: "/inventario", label: "Inventario", icon: Package },
   { href: "/kits", label: "Kits", icon: Wrench },
