@@ -11,7 +11,10 @@ tiene datos de acceso a tu sistema).
 |---|---|---|
 | ✅ Producción (la del cliente) | https://taller-webapp-three.vercel.app | Siempre activa |
 | 🧪 Prueba | https://taller-webapp-prueba.vercel.app | Siempre activa |
+| 🌐 Demo pública | https://taller-webapp-prueba.vercel.app/demo | Siempre activa |
 | 💻 Local | http://localhost:3000 | Solo mientras corres `npm run dev` |
+
+> Nota: la página de demo es pública y no requiere login. Solo abre `/demo` para validar el acceso.
 
 ---
 
