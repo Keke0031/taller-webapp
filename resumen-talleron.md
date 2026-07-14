@@ -33,16 +33,37 @@ tabla `usuarios` → edita el campo `pin`).
 
 ## Proyectos de Supabase
 
+Este documento distingue claramente los dos proyectos de Supabase que usa
+el sistema:
+
+- **Producción**: datos reales del cliente.
+- **Prueba Taller**: desarrollo, pruebas y la demo pública.
+
 ### Producción
 - Dashboard: https://supabase.com/dashboard/project/pyijhhxdkykixyctlryj
 - Project URL: `https://pyijhhxdkykixyctlryj.supabase.co`
-- Service role key: *(sácala de Settings → API Keys → Secret keys — no la
-  guardes en texto plano en ningún lado que no sea tu `.env.local` o las
-  variables de entorno de Vercel)*
+- Uso: producción real. No hagas cambios de migración ni ediciones masivas sin
+  validar primero con el cliente.
+- Variables de entorno: `SUPABASE_URL` y `SUPABASE_SERVICE_ROLE_KEY` de
+  producción deben ir solo en el proyecto de Vercel de `Production`.
 
 ### Prueba Taller
 - Project URL: `https://rvbprxfacfkwiqrocsrp.supabase.co`
-- Service role key: *(igual, sácala de su propio Settings → API Keys)*
+- Uso: pruebas, desarrollo y validación antes de pasar a producción.
+- Variables de entorno: `SUPABASE_URL` y `SUPABASE_SERVICE_ROLE_KEY` de prueba
+  se usan en el deploy normal de `npx vercel` / `Preview`.
+- Nota: la demo pública usa este proyecto de prueba y la URL
+  `https://taller-webapp-prueba.vercel.app/demo`.
+
+### Cómo diferenciar los proyectos en tu equipo
+- Producción y Prueba tienen claves y datos distintos.
+- En tu máquina local, revisa siempre `SUPABASE_URL` para saber a cuál proyecto
+  estás apuntando:
+  - `pyijhhxdkykixyctlryj.supabase.co` → Producción
+  - `rvbprxfacfkwiqrocsrp.supabase.co` → Prueba Taller
+- Si trabajas con ambos, puedes mantener carpetas o variables separadas:
+  - `taller-webapp` para desarrollo/prueba
+  - `taller-webapp-produccion` para deploy o pruebas con datos reales
 
 ---
 
