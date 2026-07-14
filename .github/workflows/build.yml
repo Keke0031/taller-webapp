@@ -1,0 +1,35 @@
+# Workflow de compilación para el proyecto Taller Webapp.
+# Se ejecuta en cada push y pull request a las ramas main/master.
+# Su propósito es validar que el código compila correctamente.
+
+name: Compilación y validación
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  build:
+    name: Compilar y validar la aplicación
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Obtener el repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Ejecutar compilación de producción
+        run: npm run build
+
+      - name: Confirmar que la compilación fue exitosa
+        run: echo "Compilación completada con éxito 🚀"
