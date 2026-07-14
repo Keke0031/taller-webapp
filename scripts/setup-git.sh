@@ -81,6 +81,9 @@ else
   echo "No se proporcionó GIT_REMOTE; omitiendo configuración de remoto"
 fi
 
+# Instalar githooks locales para que el pre-commit funcione
+bash scripts/install-githooks.sh
+
 # Resumen
 echo "---Resumen---"
 git rev-parse --show-toplevel 2>/dev/null || true

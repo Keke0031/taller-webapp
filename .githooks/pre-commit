@@ -1,20 +1,21 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Simple pre-commit hook: run tests if package.json has a test script
+# Simple pre-commit hook: run tests only if package.json defines a test script
 ROOT="$(git rev-parse --show-toplevel)"
 cd "$ROOT"
 
-if [ -f package.json ]; then
-  has_test=$(node -e "const p=require('./package.json'); console.log(!!p.scripts && !!p.scripts.test)") || true
-  if [ "$has_test" = "true" ]; then
-    echo "Running npm test before commit..."
-    npm test || { echo "Tests failed — aborting commit"; exit 1; }
-  else
-    echo "No npm test script — skipping tests"
-  fi
+if [ ! -f package.json ]; then
+  echo "No package.json found — skipping pre-commit hook."
+  exit 0
+fi
+
+has_test=$(node -e "const p=require('./package.json'); console.log(p.scripts && p.scripts.test ? 'true' : 'false')") || true
+if [ "$has_test" = "true" ]; then
+  echo "Running npm test before commit..."
+  npm test --if-present || { echo "Tests failed — aborting commit"; exit 1; }
 else
-  echo "No package.json — skipping tests"
+  echo "No npm test script — skipping tests"
 fi
 
 exit 0
