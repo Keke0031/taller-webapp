@@ -1,0 +1,14 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Auto-commit al terminar tarea del agente",
+      "trigger": "PostTaskExec",
+      "action": {
+        "type": "command",
+        "command": "cd \"/Users/kennethho/taller-webapp Visual\" && git add -A && git diff --cached --quiet || git commit -m \"auto: cambios del agente $(date '+%Y-%m-%d %H:%M')\" && git push origin main",
+        "timeout": 60
+      }
+    }
+  ]
+}
